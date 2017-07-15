@@ -1,76 +1,91 @@
-import {log} from "./util.es6";
+import {log, err} from "./util.es6";
+import DeviceManager from "./DeviceManager.es6";
 
-// デバイス情報
-let _device = null;
+const customDevice = new DeviceManager();
+const batteryDevice = new DeviceManager();
+const heartRateDevice = new DeviceManager();
+
+const BATTERY = 'battery_service';
+const BATTERY_CON = 'battery_level';
+const HEART_RATE = 'heart_rate';
+const HEART_RATE_CON = 'heart_rate_control_point';
 
 // セットアップ処理
-(()=> {log("start.");})();
+(()=> {
+  log("start.");
+  //window.ArrayBuffer ? alert("ArrayBuffer OK!") : alert("ArrayBuffer NG!");
+})();
 
 /** ボタンクリックトリガー */
-$('#id_btn').click(() => {
-  connect()
-  .then(disconnect)
-  .catch(error => log(error));
+$('#custom_connect').click(() => {
+  const service = $('#input_service').val();
+  const characteristic = $("#input_characteristic").val();
+  log("service=" + service, "characteristic=" + characteristic);
+  customDevice.connect(service, characteristic)
+  .then(() => connect("#custom_connect"));
+});
+$('#custom_disconnect').click(() => {
+  customDevice.disconnect()
+  .then(() => disconnect("#custom_connect"));
+});
+$('#custom_read').click(() => {
+  customDevice.readValue();
+});
+$('#custom_save').click(() => {
+  customDevice.saveValue();
+});
+$('#custom_notification').click(() => {
+  customDevice.notification();
 });
 
-/** 
- * デバイスリンキング開始
- */
-function connect() {
-  return new Promise((resolve) => {
-    log("clickFunc called.");
+$('#battery_connect').click(() => {
+  batteryDevice.connect(BATTERY, BATTERY_CON)
+  .then(() => connect("#battery_connect"));
+});
+$('#battery_disconnect').click(() => {
+  batteryDevice.disconnect()
+  .then(() => disconnect("#battery_connect"));
+});
+$('#battery_read').click(() => {
+  batteryDevice.readValue();
+});
+$('#battery_save').click(() => {
+  batteryDevice.saveValue();
+});
+$('#battery_notification').click(() => {
+  batteryDevice.notification();
+});
 
-    // デバイスのスキャン
-    log("scanning device.");
-    // navigator.bluetooth.requestDevice({ acceptAllDevices: true })
-    navigator.bluetooth.requestDevice({filters: [{services: ['battery_service']}]})
+$('#heart_rate_connect').click(() => {
+  heartRateDevice.connect(HEART_RATE, HEART_RATE_CON)
+  .then(() => {
+    $("#heart_rate_connect").hide();
+    $("#heart_rate_connect_menu").show();
+  })
+});
+$('#heart_rate_disconnect').click(() => {
+  batteryDevice.disconnect()
+  .then(() => {
+    $("#heart_rate_connect").show();
+    $("#heart_rate_connect_menu").hide();
+  })
+});
+$('#heart_rate_read').click(() => {
+  heartRateDevice.readValue()
+});
+$('#heart_rate_save').click(() =>{
+  heartRateDevice.saveValue()
+});
+$('#heart_rate_notification').click(() => {
+  heartRateDevice.notification()
+});
 
-    // デバイス見つかったので、接続する
-    .then(device => {
-      _device = device;
-      log("start connecting device. ", device);
-      return device.gatt.connect();
-    })
-
-    // デバイスに接続できたので、そのデバイスのServiceを調べる
-    .then(server => {
-      log("checking sevice. ", server);
-      return server.getPrimaryService('battery_service');
-    })
-
-    // Serviceを全部調べたので、次はサービスに紐づくCharacteristicsを調べる
-    .then(service => {
-      log("checking characteristics. ", service);
-      return service.getCharacteristic('battery_level');
-    })
-
-    // characteristicsを発見したので、characteristicsの中身を見に行く
-    .then(characteristics => {
-      log("discovered characteristics. ", characteristics);
-      return characteristics.readValue()
-        // 全部の Chracteristics をゲット
-        // あとはその Characteristics を Read/Writeしていく
-    })
-
-    // characteristicsの中身を見に行くを出力
-    .then(value => {
-      log("read data. ", value);
-      log("battery = " + value.getUint8(0));
-    })
-
-    // 全て成功したのでPromiseを完了状態にする
-    .then(() => {
-      resolve();
-    })
-  });
+function connect(id) {
+  $(id).hide();
+  $(id + "_menu").show();
 }
 
-/**
- * デバイスリンキング解除
- */
-function disconnect() {
-  return new Promise((resolve) => {
-    log("disconnect. ");
-    return _device ? _device.gatt.disconnect() : null;
-  });
+function disconnect(id) {
+  $(id).show();
+  $(id + "_menu").hide();
 }

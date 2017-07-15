@@ -1,0 +1,184 @@
+/**
+ * $Variables 
+ **/
+/**
+ * $Mixins 
+ **/
+/* http://www.sitepoint.com/sass-mixins-kickstart-project/ */
+a.btn.color2 {
+  background-color: #57b742;
+  box-shadow: 0 0 0 -2px #EEEEEE, 0 0 0 -1px #57b742;
+}
+
+a.btn.color2:hover, a.btn.color2:focus {
+  box-shadow: 0 0 0 2px #EEEEEE, 0 0 0 4px #4fa43b;
+  -webkit-transition-timing-function: cubic-bezier(0.6, 4, 0.3, 0.8);
+  -moz-transition-timing-function: cubic-bezier(0.6, 4, 0.3, 0.8);
+  -o-transition-timing-function: cubic-bezier(0.6, 4, 0.3, 0.8);
+  transition-timing-function: cubic-bezier(0.6, 4, 0.3, 0.8);
+  -webkit-animation: gelatine 0.5s 1;
+  -moz-animation: gelatine 0.5s 1;
+  -o-animation: gelatine 0.5s 1;
+  animation: gelatine 0.5s 1;
+}
+
+/* $Buttom */
+a.btn {
+  display: inline-block;
+  margin: 15px 15px 0;
+  padding: .1em .5em;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #FE4365;
+  border-radius: 3px;
+  box-shadow: 0 0 0 -2px #EEEEEE, 0 0 0 -1px #FE4365;
+  border: none;
+  -webkit-transition: -webkit-box-shadow .3s;
+  transition: box-shadow .3s;
+}
+
+a.btn:hover, a.btn:focus {
+  box-shadow: 0 0 0 2px #EEEEEE, 0 0 0 4px #ff0464;
+  -webkit-transition-timing-function: cubic-bezier(0.6, 4, 0.3, 0.8);
+  -moz-transition-timing-function: cubic-bezier(0.6, 4, 0.3, 0.8);
+  -o-transition-timing-function: cubic-bezier(0.6, 4, 0.3, 0.8);
+  transition-timing-function: cubic-bezier(0.6, 4, 0.3, 0.8);
+  -webkit-animation: gelatine 0.5s 1;
+  -moz-animation: gelatine 0.5s 1;
+  -o-animation: gelatine 0.5s 1;
+  animation: gelatine 0.5s 1;
+}
+
+a.btn-secondary {
+  background: #C8C8A9;
+  box-shadow: 0 0 0 -2px #EEEEEE, 0 0 0 -1px #C8C8A9;
+}
+
+a.btn-secondary:hover {
+  box-shadow: 0 0 0 2px #EEEEEE, 0 0 0 4px #bebe99;
+}
+
+a.btn:active,
+a.btn-secondary:active {
+  background: #CCCCCC;
+  -webkit-transition-duration: 0;
+  -moz-transition-duration: 0;
+  -o-transition-duration: 0;
+  transition-duration: 0;
+  box-shadow: 0 0 0 2px #EEEEEE, 0 0 0 4px #bfbfbf;
+}
+
+/**
+ * $keyframes \ gelatine 
+ **/
+@keyframes gelatine {
+  from, to {
+    -webkit-transform: scale(1, 1);
+    transform: scale(1, 1);
+  }
+  25% {
+    -webkit-transform: scale(0.9, 1.1);
+    transform: scale(0.9, 1.1);
+  }
+  50% {
+    -webkit-transform: scale(1.1, 0.9);
+    transform: scale(1.1, 0.9);
+  }
+  75% {
+    -webkit-transform: scale(0.95, 1.05);
+    transform: scale(0.95, 1.05);
+  }
+  from, to {
+    -webkit-transform: scale(1, 1);
+    transform: scale(1, 1);
+  }
+  25% {
+    -webkit-transform: scale(0.9, 1.1);
+    transform: scale(0.9, 1.1);
+  }
+  50% {
+    -webkit-transform: scale(1.1, 0.9);
+    transform: scale(1.1, 0.9);
+  }
+  75% {
+    -webkit-transform: scale(0.95, 1.05);
+    transform: scale(0.95, 1.05);
+  }
+}
+
+@-webkit-keyframes gelatine {
+  from, to {
+    -webkit-transform: scale(1, 1);
+    transform: scale(1, 1);
+  }
+  25% {
+    -webkit-transform: scale(0.9, 1.1);
+    transform: scale(0.9, 1.1);
+  }
+  50% {
+    -webkit-transform: scale(1.1, 0.9);
+    transform: scale(1.1, 0.9);
+  }
+  75% {
+    -webkit-transform: scale(0.95, 1.05);
+    transform: scale(0.95, 1.05);
+  }
+  from, to {
+    -webkit-transform: scale(1, 1);
+    transform: scale(1, 1);
+  }
+  25% {
+    -webkit-transform: scale(0.9, 1.1);
+    transform: scale(0.9, 1.1);
+  }
+  50% {
+    -webkit-transform: scale(1.1, 0.9);
+    transform: scale(1.1, 0.9);
+  }
+  75% {
+    -webkit-transform: scale(0.95, 1.05);
+    transform: scale(0.95, 1.05);
+  }
+}
+
+form {
+  padding: 0 16px;
+}
+
+input {
+  width: 400px;
+  border: 0;
+  font-size: 1em;
+  font-family: Arial, sans-serif;
+  color: #aaa;
+  border: solid 1px #ccc;
+}
+
+#log {
+  position: fixed;
+  height: 100px;
+  width: 100%;
+  bottom: 0px;
+  left: 0px;
+  background: #000000;
+  border: 2px solid rgba(51, 51, 51, 0.5);
+  padding: 10px;
+  opacity: 1;
+  overflow: scroll;
+}
+
+#log .debug {
+  color: #00FF00;
+}
+
+#log .error {
+  color: #FF0000;
+}
+
+#custom, #battery, #heart_rate {
+  padding: 16px 0;
+  margin: 16px 0;
+  border: 2px solid #DDD;
+  overflow: hidden;
+}

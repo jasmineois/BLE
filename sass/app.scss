@@ -1,0 +1,10 @@
+@import "compoenent/button";
+@import "compoenent/input";
+@import "compoenent/log";
+
+#custom, #battery, #heart_rate {
+    padding: 16px 0;
+    margin: 16px 0;
+    border: 2px solid #DDD;
+    overflow: hidden;
+}
