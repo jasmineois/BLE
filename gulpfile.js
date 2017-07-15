@@ -18,7 +18,7 @@ gulp.task('ts', function () {
         })
         .bundle()
         .pipe(source('bundle.js'))
-        .pipe(gulp.dest('./dist/js'));
+        .pipe(gulp.dest('./docs/js'));
 });
 
 gulp.task('es6', function () {
@@ -31,7 +31,7 @@ gulp.task('es6', function () {
         .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(uglify())
         .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest('./dist/js'))
+        .pipe(gulp.dest('./docs/js'))
         .pipe(browserSync.reload({stream: true}))
 });
 
@@ -45,12 +45,12 @@ gulp.task('lint', () => {
 gulp.task('sass', function(){
   gulp.src('./sass/**/*.scss')
     .pipe(sass({outputStyle: 'expanded'}))
-    .pipe(gulp.dest('./dist/css'));
+    .pipe(gulp.dest('./docs/css'));
 });
 
 gulp.task('copy', () => {
-    gulp.src('public/lib/*.js').pipe(gulp.dest('./dist/js'));
-    gulp.src('public/*.html').pipe(gulp.dest('./dist'));
+    gulp.src('public/lib/*.js').pipe(gulp.dest('./docs/js'));
+    gulp.src('public/*.html').pipe(gulp.dest('./docs'));
 });
 
 gulp.task('default', () => {
