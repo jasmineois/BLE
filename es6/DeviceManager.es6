@@ -8,6 +8,8 @@ import _notification from "./controller/notification.es6";
 export default class DeviceManager {
 
     constructor() {
+        // デバイス状態（接続中：true）
+        this.connecting = false;
         // デバイス情報
         this.name = null;
         // デバイス情報
@@ -19,32 +21,39 @@ export default class DeviceManager {
     }
 
     connect(service, characteristic) {
+        this.connecting = false;
         return _connect(service, characteristic)
         .then((res) => {
+            this.connecting = true;
             this.name = res.name
             this.device = res.device;
             this.service = res.service;
             this.characteristics = res.characteristics;
         })
-        .catch(error => err(error));
+        .catch(this.error);
     }
 
     disconnect() {
         return _disconnect(this.device)
-        .catch(error => err(error));
+        .catch(this.error);
     }
 
     readValue() {
         return _readValue(this.characteristics)
-        .catch(error => err(error));
+        .catch(this.error);
     }
 
     saveValue(value) {
         return _saveValue(this.characteristics, value)
-        .catch(error => err(error));
+        .catch(this.error);
     }
 
     notification(){
-        return _notification(this.characteristics);
+        return _notification(this.characteristics)
+        .catch(this.error);
+    }
+
+    error(error) {
+        err(error);
     }
 }

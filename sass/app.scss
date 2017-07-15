@@ -1,20 +1,10 @@
-#log {
-    position: fixed;
-    height: 100px;
-    width: 100%;
-    bottom: 0px;
-    left: 0px;
-    background: #000000;
-    border: 2px solid rgba(51, 51, 51, 0.5);
-    padding: 10px;
-    opacity: 1;
-    overflow: scroll;
+@import "compoenent/button";
+@import "compoenent/input";
+@import "compoenent/log";
 
-    .debug {
-        color: #00FF00;
-    }
-
-    .error {
-        color: #FF0000;
-    }
+#custom, #battery, #heart_rate {
+    padding: 16px 0;
+    margin: 16px 0;
+    border: 2px solid #DDD;
+    overflow: hidden;
 }

@@ -3,14 +3,13 @@ import {log, err} from "../util.es6";
 /**
  * value取得
  */
-export default function saveValue(_characteristics, value = 0x01) {
+export default function saveValue(_characteristics, value = [1]) {
   return new Promise((resolve) => {
     log("save.");
-    //let value = new Uint8Array([1]);
-    let encoder = new TextEncoder('utf-8');
-    _characteristics.writeValue(encoder.encode(value))
+    let v = new Uint8Array(value);
+    _characteristics.writeValue(v)
     .then(res => {
-      log("save data. ", res);
+      log("save data. ");
       resolve();
     })
   });

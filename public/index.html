@@ -8,28 +8,37 @@
 <body>
     <h1>Web Bluetooth</h1>
     <div id="custom">
-        <a href="#" id="custom_connect">connect</a>
-        <a href="#" id="custom_disconnect" style="display: none;">disconnect</a>
+        <form>
+            <table>
+                <tr><td>service:</td><td><input type="text" id="input_service" /></td></tr>
+                <tr><td>characteristic:</td><td><input type="text" id="input_characteristic" /></td></tr>
+            </table>
+        </form>
+        <a class="btn color2" href="#" id="custom_connect">Custom connect</a>
         <div id="custom_connect_menu" style="display: none;">
-            <a href="#" id="custom_read">read</a>
-            <a href="#" id="custom_save">save</a>
-            <a href="#" id="custom_notification">notification</a>
+            <a class="btn" href="#" id="custom_read">Custom read</a><br>
+            <a class="btn" href="#" id="custom_save">Custom save</a><br>
+            <a class="btn" href="#" id="custom_notification">Custom notification</a><br>
+            <a class="btn" href="#" id="custom_disconnect">Custom disconnect</a>
         </div>
     </div>
     <div id="battery">
-        <a href="#" id="battery_connect">connect</a>
-        <a href="#" id="battery_disconnect" style="display: none;">disconnect</a>
+        <a class="btn color2" href="#" id="battery_connect">Battery connect</a>
         <div id="battery_connect_menu" style="display: none;">
-            <a href="#" id="battery_read">read</a>
-            <a href="#" id="battery_save">save</a>
-            <a href="#" id="battery_notification">notification</a>
+            <a class="btn" href="#" id="battery_read">Battery read</a><br>
+            <a class="btn" href="#" id="battery_save">Battery save</a><br>
+            <a class="btn" href="#" id="battery_notification">Battery notification</a><br>
+            <a class="btn" href="#" id="battery_disconnect">Battery disconnect</a>
         </div>
     </div>
     <div id="heart_rate">
-        <a href="#" id="heart_rate_connect">connect</a>
-        <a href="#" id="heart_rate_read">read</a>
-        <a href="#" id="heart_rate_save">save</a>
-        <a href="#" id="heart_notification">notification</a>
+        <a class="btn color2" href="#" id="heart_rate_connect">Heart Rate Monitor connect</a>
+        <div id="heart_rate_connect_menu" style="display: none;">
+            <a class="btn" href="#" id="heart_rate_read">Heart Rate Monitor read</a><br>
+            <a class="btn" href="#" id="heart_rate_save">Heart Rate Monitor save</a><br>
+            <a class="btn" href="#" id="heart_rate_notification">Heart Rate Monitor notification</a><br>
+            <a class="btn" href="#" id="heart_rate_disconnect">Heart Rate Monitor disconnect</a>
+        </div>
     </div>
     <div id="log"></div>
     <script src="js/main.js"></script>
