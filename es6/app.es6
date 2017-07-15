@@ -1,76 +1,45 @@
-import {log} from "./util.es6";
+import {log, err} from "./util.es6";
+import DeviceManager from "./DeviceManager.es6";
 
-// デバイス情報
-let _device = null;
+const batteryDevice = new DeviceManager();
+const heartRateDevice = new DeviceManager();
+
+const BATTERY = 'battery_service';
+const BATTERY_CON = 'battery_level';
+const HEART_RATE = 'heart_rate';
+const HEART_RATE_CON = 'heart_rate_control_point';
 
 // セットアップ処理
 (()=> {log("start.");})();
 
 /** ボタンクリックトリガー */
-$('#id_btn').click(() => {
-  connect()
-  .then(disconnect)
-  .catch(error => log(error));
+$('#battery_connect').click(() => {
+  batteryDevice.connect(BATTERY, BATTERY_CON)
+  .then(() => {
+    $("#battery_connect").hide();
+    $("#battery_disconnect").show();
+    $("#battery_connect_menu").show();
+  })
+});
+$('#battery_disconnect').click(() => {
+  batteryDevice.disconnect()
+  .then(() => {
+    $("#battery_connect").show();
+    $("#battery_disconnect").hide();
+    $("#battery_connect_menu").hide();
+  })
+});
+$('#battery_read').click(() => {
+  batteryDevice.readValue();
+});
+$('#battery_save').click(() => {
+  batteryDevice.saveValue();
+});
+$('#battery_notification').click(() => {
+  batteryDevice.notification();
 });
 
-/** 
- * デバイスリンキング開始
- */
-function connect() {
-  return new Promise((resolve) => {
-    log("clickFunc called.");
-
-    // デバイスのスキャン
-    log("scanning device.");
-    // navigator.bluetooth.requestDevice({ acceptAllDevices: true })
-    navigator.bluetooth.requestDevice({filters: [{services: ['battery_service']}]})
-
-    // デバイス見つかったので、接続する
-    .then(device => {
-      _device = device;
-      log("start connecting device. ", device);
-      return device.gatt.connect();
-    })
-
-    // デバイスに接続できたので、そのデバイスのServiceを調べる
-    .then(server => {
-      log("checking sevice. ", server);
-      return server.getPrimaryService('battery_service');
-    })
-
-    // Serviceを全部調べたので、次はサービスに紐づくCharacteristicsを調べる
-    .then(service => {
-      log("checking characteristics. ", service);
-      return service.getCharacteristic('battery_level');
-    })
-
-    // characteristicsを発見したので、characteristicsの中身を見に行く
-    .then(characteristics => {
-      log("discovered characteristics. ", characteristics);
-      return characteristics.readValue()
-        // 全部の Chracteristics をゲット
-        // あとはその Characteristics を Read/Writeしていく
-    })
-
-    // characteristicsの中身を見に行くを出力
-    .then(value => {
-      log("read data. ", value);
-      log("battery = " + value.getUint8(0));
-    })
-
-    // 全て成功したのでPromiseを完了状態にする
-    .then(() => {
-      resolve();
-    })
-  });
-}
-
-/**
- * デバイスリンキング解除
- */
-function disconnect() {
-  return new Promise((resolve) => {
-    log("disconnect. ");
-    return _device ? _device.gatt.disconnect() : null;
-  });
-}
+$('#heart_rate_connect').click(() => heartRateDevice.connect(HEART_RATE, HEART_RATE_CON));
+$('#heart_rate_read').click(() => heartRateDevice.readValue());
+$('#heart_rate_save').click(() => heartRateDevice.saveValue());
+$('#heart_rate_notification').click(() => heartRateDevice.notification());
