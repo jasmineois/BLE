@@ -25,7 +25,6 @@ a.btn.color2:hover, a.btn.color2:focus {
 /* $Buttom */
 a.btn {
   display: inline-block;
-  margin: 15px 15px 0;
   padding: .1em .5em;
   text-decoration: none;
   outline: none;
@@ -142,13 +141,18 @@ a.btn-secondary:active {
   }
 }
 
+.not_margin {
+  margin: 0px;
+}
+
 form {
   padding: 0 16px;
 }
 
 input {
-  width: 400px;
+  width: 95%;
   border: 0;
+  margin: 4px;
   font-size: 1em;
   font-family: Arial, sans-serif;
   color: #aaa;
@@ -157,7 +161,7 @@ input {
 
 #log {
   position: fixed;
-  height: 300px;
+  height: 200px;
   width: 100%;
   bottom: 0px;
   left: 0px;
@@ -166,6 +170,7 @@ input {
   padding: 10px;
   opacity: 1;
   overflow: scroll;
+  font-size: .7em;
 }
 
 #log .debug {

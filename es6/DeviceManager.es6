@@ -55,5 +55,6 @@ export default class DeviceManager {
 
     error(error) {
         err(error);
+        throw "ERROR"
     }
 }

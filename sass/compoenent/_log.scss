@@ -1,6 +1,6 @@
 #log {
     position: fixed;
-    height: 300px;
+    height: 200px;
     width: 100%;
     bottom: 0px;
     left: 0px;
@@ -9,6 +9,7 @@
     padding: 10px;
     opacity: 1;
     overflow: scroll;
+    font-size: .7em;
 
     .debug {
         color: #00FF00;

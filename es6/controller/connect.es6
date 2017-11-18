@@ -3,6 +3,12 @@ import {log, err} from "../util.es6";
 const DEF_SERVICE = 'battery_service';
 const DEF_CHARACTERISTIC = 'battery_level';
 
+const anyDevice = () => {
+  return Array.from('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
+      .map(c => ({namePrefix: c}))
+      .concat({name: ''});
+}
+
 /** 
  * デバイスリンキング開始
  */
@@ -18,18 +24,19 @@ export default function connect(service = DEF_SERVICE, characteristic = DEF_CHAR
     // デバイスのスキャン
     log("scanning device.");
     navigator.bluetooth.requestDevice({filters: [{services: [service]}]})
+    // navigator.bluetooth.requestDevice({filters: anyDevice()})
 
     // デバイス見つかったので、接続する
     .then(device => {
       _device = device;
       _name = device.name;
-      log("start connecting device. ", device);
+      log("start connecting device. ", JSON.stringify(device));
       return device.gatt.connect();
     })
 
     // デバイスに接続できたので、そのデバイスのServiceを調べる
     .then(server => {
-      log("checking sevice. ", server);
+      log("checking sevice. ", JSON.stringify(server));
       return server.getPrimaryService(service);
     })
 

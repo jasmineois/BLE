@@ -52,7 +52,7 @@ a.btn.color2 {
 /* $Buttom */
 a.btn{
   display: inline-block;
-  margin: 15px 15px 0;
+  // margin: 15px 15px 0;
   padding: .1em .5em;
   // @include fontsize(26);
   text-decoration: none;
@@ -155,4 +155,9 @@ a.btn-secondary:active  {
     -webkit-transform:scale(.95, 1.05);
     transform:scale(.95, 1.05)
   }
+}
+
+// custom
+.not_margin {
+  margin: 0px;
 }
