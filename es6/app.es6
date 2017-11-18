@@ -91,7 +91,7 @@ $('#BLESerial_connect').click(() => {
   log("characteristicNotify=" + characteristicNotify)
   log("characteristicWrite=" + characteristicWrite)
   notifyCustomDevice.connect(service, characteristicNotify)
-  .then(() => writeCustomDevice.connect(service, characteristicWrite))
+  // .then(() => writeCustomDevice.connect(service, characteristicWrite))
   .then(() => connect("#BLESerial_connect"))
   .catch(() => disconnect("#BLESerial_connect"))
 });
